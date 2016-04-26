@@ -106,10 +106,11 @@ def alphabeta_search(state, game, d=4, cutoff_test=None, eval_fn=None):
     eval_fn = eval_fn or (lambda state: game.utility(state, player))
 
     lista = game.successors(state)
-
-    # for i in lista:
-    #     print i
-    #     print "------\n"
+    texto = ""
+    for i in lista:
+        texto += "Heuristica "+str(i[0])+": "
+        texto += str(min_value(i[1], -infinity, infinity, 0))+" -- "
+    print texto
 
     action, state = argmax(lista,
                            lambda ((a, s)): min_value(s, -infinity, infinity, 0))

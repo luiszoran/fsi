@@ -29,7 +29,8 @@ while True:
         print "Thinking..."
         #move = games.minimax_decision(state, game)
         #move = games.alphabeta_full_search(state, game)
-        move = games.alphabeta_search(state, game, eval_fn=heuristic.randomHeuristic)
+
+        move = games.alphabeta_search(state, game, eval_fn=heuristic.posibles4EnRaya)
 
         state = game.make_move(move, state)
         player = 'O'

@@ -23,19 +23,19 @@ def calculateHeuristic(state, player):
 
 
 def comprobarDiagonales(board, he, move, player):
-    he = comprobarDiagonalesIzquierdaArriba(board, he, move, player)
-    he = comprobarDiagonalesIzquierdaAbajo(board, he, move, player)
-    he = comprobarDiagonalesDerechaArriba(board, he, move, player)
-    he = comprobarDiagonalesDerechaAbajo(board, he, move, player)
+    he = comprobarDiagonalesIzquierdaArriba(board, he, move, player, -1, 1)
+    he = comprobarDiagonalesIzquierdaAbajo(board, he, move, player, 1, -1)
+    he = comprobarDiagonalesDerechaArriba(board, he, move, player, 1, 1)
+    he = comprobarDiagonalesDerechaAbajo(board, he, move, player, -1, -1)
     return he
 
 
-def comprobarDiagonalesIzquierdaArriba(board, he, move, player):
+def comprobarDiagonalesIzquierdaArriba(board, he, move, player, desplazamientoX, desplazamientoY):
     # Diagonales
     # Izquierdea arriba
     x, y = move
-    x -= 1
-    y += 1
+    x += desplazamientoX
+    y += desplazamientoY
     count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
         if count == 4:
@@ -53,11 +53,11 @@ def comprobarDiagonalesIzquierdaArriba(board, he, move, player):
     return he
 
 
-def comprobarDiagonalesIzquierdaAbajo(board, he, move, player):
+def comprobarDiagonalesIzquierdaAbajo(board, he, move, player, desplazamientoX, desplazamientoY):
     # Izquierda abajo
     x, y = move
-    x += 1
-    y -= 1
+    x += desplazamientoX
+    y += desplazamientoY
     count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
         if count == 4:
@@ -75,11 +75,11 @@ def comprobarDiagonalesIzquierdaAbajo(board, he, move, player):
     return he
 
 
-def comprobarDiagonalesDerechaArriba(board, he, move, player):
+def comprobarDiagonalesDerechaArriba(board, he, move, player, desplazamientoX, desplazamientoY):
     # Derecha arriba
     x, y = move
-    x += 1
-    y += 1
+    x += desplazamientoX
+    y += desplazamientoY
     count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
         if count == 4:
@@ -97,11 +97,11 @@ def comprobarDiagonalesDerechaArriba(board, he, move, player):
     return he
 
 
-def comprobarDiagonalesDerechaAbajo(board, he, move, player):
+def comprobarDiagonalesDerechaAbajo(board, he, move, player, desplazamientoX, desplazamientoY):
     # Derecha abajo
     x, y = move
-    x -= 1
-    y -= 1
+    x += desplazamientoX
+    y += desplazamientoY
     count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
         if count == 4:

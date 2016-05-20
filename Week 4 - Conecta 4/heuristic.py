@@ -29,9 +29,14 @@ def comprobarDiagonales(board, he, move, player):
     x, y = move
     x -= 1
     y += 1
+    count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -43,9 +48,14 @@ def comprobarDiagonales(board, he, move, player):
     x, y = move
     x += 1
     y -= 1
+    count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -57,9 +67,14 @@ def comprobarDiagonales(board, he, move, player):
     x, y = move
     x += 1
     y += 1
+    count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -71,9 +86,14 @@ def comprobarDiagonales(board, he, move, player):
     x, y = move
     x -= 1
     y -= 1
+    count = 0
     while y > 0 and y < 7 and x > 0 and x < 8:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -88,9 +108,14 @@ def comprobarColumnas(board, he, move, player):
     # Abajo
     x, y = move
     y -= 1
+    count = 0
     while y > 0:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -100,9 +125,14 @@ def comprobarColumnas(board, he, move, player):
     # Arriba
     x, y = move
     y += 1
+    count = 0
     while y < 7:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
@@ -117,26 +147,38 @@ def comprobarFilas(board, he, move, player):
     # Izquierda
     x, y = move
     x -= 1
+    count = 0
     while x > 0:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
             break
         x -= 1
+        count += 1
 
     # Derecha
     x, y = move
     x += 1
+    count = 0
     while x < 8:
+        if count == 4:
+            he += 5000
+            return he
         if board.get((x, y), '.') == player:
             he += 50
+            count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
         else:
             break
         x += 1
+        count += 1
 
     return he
 

@@ -19,11 +19,18 @@ def calculateHeuristic(state, player):
         he = comprobarFilas(board, he, move, player)
         he = comprobarColumnas(board, he, move, player)
         he = comprobarDiagonales(board, he, move, player)
-
     return he
 
 
 def comprobarDiagonales(board, he, move, player):
+    he = comprobarDiagonalesIzquierdaArriba(board, he, move, player)
+    he = comprobarDiagonalesIzquierdaAbajo(board, he, move, player)
+    he = comprobarDiagonalesDerechaArriba(board, he, move, player)
+    he = comprobarDiagonalesDerechaAbajo(board, he, move, player)
+    return he
+
+
+def comprobarDiagonalesIzquierdaArriba(board, he, move, player):
     # Diagonales
     # Izquierdea arriba
     x, y = move
@@ -43,7 +50,10 @@ def comprobarDiagonales(board, he, move, player):
             break
         x -= 1
         y += 1
+    return he
 
+
+def comprobarDiagonalesIzquierdaAbajo(board, he, move, player):
     # Izquierda abajo
     x, y = move
     x += 1
@@ -62,7 +72,10 @@ def comprobarDiagonales(board, he, move, player):
             break
         x += 1
         y -= 1
+    return he
 
+
+def comprobarDiagonalesDerechaArriba(board, he, move, player):
     # Derecha arriba
     x, y = move
     x += 1
@@ -81,7 +94,10 @@ def comprobarDiagonales(board, he, move, player):
             break
         x += 1
         y += 1
+    return he
 
+
+def comprobarDiagonalesDerechaAbajo(board, he, move, player):
     # Derecha abajo
     x, y = move
     x -= 1
@@ -104,6 +120,12 @@ def comprobarDiagonales(board, he, move, player):
 
 
 def comprobarColumnas(board, he, move, player):
+    he = comprobarColumnasAbajo(board, he, move, player)
+    he = comprobarColumnasArriba(board, he, move, player)
+    return he
+
+
+def comprobarColumnasAbajo(board, he, move, player):
     # Columnas
     # Abajo
     x, y = move
@@ -121,7 +143,10 @@ def comprobarColumnas(board, he, move, player):
         else:
             break
         y -= 1
+    return he
 
+
+def comprobarColumnasArriba(board, he, move, player):
     # Arriba
     x, y = move
     y += 1
@@ -143,6 +168,12 @@ def comprobarColumnas(board, he, move, player):
 
 
 def comprobarFilas(board, he, move, player):
+    he = comprobarFilasIzquierda(board, he, move, player)
+    he = comprobarFilasDerecha(board, he, move, player)
+    return he
+
+
+def comprobarFilasIzquierda(board, he, move, player):
     # Filas
     # Izquierda
     x, y = move
@@ -161,7 +192,10 @@ def comprobarFilas(board, he, move, player):
             break
         x -= 1
         count += 1
+    return he
 
+
+def comprobarFilasDerecha(board, he, move, player):
     # Derecha
     x, y = move
     x += 1
@@ -179,9 +213,7 @@ def comprobarFilas(board, he, move, player):
             break
         x += 1
         count += 1
-
     return he
-
 
 def legal_moves(state):
     "Legal moves are any square not yet taken."

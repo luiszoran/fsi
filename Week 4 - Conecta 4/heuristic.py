@@ -13,13 +13,12 @@ def heuristic(state):
 
 def calculateHeuristic(state, player):
     board = state.board
+    moves = legal_moves(state)
     he = 0
-    for move in board:
-        if board.get(move) != player:
-            continue
-        he += comprobarFilas(board, he, move, player)
-        he += comprobarColumnas(board, he, move, player)
-        he += comprobarDiagonales(board, he, move, player)
+    for move in moves:
+        he = comprobarFilas(board, he, move, player)
+        he = comprobarColumnas(board, he, move, player)
+        he = comprobarDiagonales(board, he, move, player)
 
     return he
 

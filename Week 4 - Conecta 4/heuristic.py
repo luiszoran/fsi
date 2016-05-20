@@ -36,15 +36,17 @@ def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
     x += desplazamientoX
     y += desplazamientoY
     count = 0
+    inRow = True
     while 0 < y < 7 and 0 < x < 8:
-        if count == 4:
-            he += 5000
+        if count == 4 and inRow:
+            he += 10000
             return he
         if board.get((x, y), '.') == player:
             he += 50
             count += 1
         elif board.get((x, y), '.') == ".":
             he += 25
+            inRow = False
         else:
             break
         x += desplazamientoX

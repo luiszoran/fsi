@@ -6,33 +6,47 @@ game = games.ConnectFour()
 
 state = game.initial
 
+def computersTurn():
+    global state, player
+    print "Thinking..."
+    # move = games.minimax_decision(state, game)
+    # move = games.alphabeta_full_search(state, game)
+    move = games.alphabeta_search(state, game, eval_fn=heuristic.randomHeuristic)
+    state = game.make_move(move, state)
+    player = 'player'
 
-player = 'X'
+
+def playersTurn():
+    global col_str, coor, state, player
+    col_str = raw_input("Movimiento: ")
+    coor = int(str(col_str).strip())
+    x = coor
+    y = -1
+    legal_moves = game.legal_moves(state)
+    for lm in legal_moves:
+        if lm[0] == x:
+            y = lm[1]
+    state = game.make_move((x, y), state)
+    player = 'computer'
+
+
+col_str = raw_input("Quiere empezar usted (S/N)?: ")
+coor = str(col_str).strip().lower()
+
+if coor == "s":
+    player = "player"
+else:
+    player = "computer"
+
 
 while True:
     print "Jugador a mover:", game.to_move(state)
     game.display(state)
 
-    if player == 'O':
-        col_str = raw_input("Movimiento: ")
-        coor = int(str(col_str).strip())
-        x = coor
-        y = -1
-        legal_moves = game.legal_moves(state)
-        for lm in legal_moves:
-            if lm[0] == x:
-                y = lm[1]
-
-        state = game.make_move((x, y), state)
-        player = 'X'
+    if player == 'player':
+        playersTurn()
     else:
-        print "Thinking..."
-        #move = games.minimax_decision(state, game)
-        #move = games.alphabeta_full_search(state, game)
-        move = games.alphabeta_search(state, game, eval_fn=heuristic.randomHeuristic)
-
-        state = game.make_move(move, state)
-        player = 'O'
+        computersTurn()
     print "-------------------"
     if game.terminal_test(state):
         game.display(state)

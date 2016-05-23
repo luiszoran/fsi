@@ -11,7 +11,7 @@ def computersTurn():
     print "Thinking..."
     # move = games.minimax_decision(state, game)
     # move = games.alphabeta_full_search(state, game)
-    move = games.alphabeta_search(state, game, eval_fn=heuristic.randomHeuristic)
+    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
     state = game.make_move(move, state)
     player = 'player'
 
@@ -37,7 +37,7 @@ if coor == "s":
     player = "player"
 else:
     player = "computer"
-    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
+#    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
 
 
 while True:

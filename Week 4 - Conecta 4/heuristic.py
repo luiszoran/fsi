@@ -8,15 +8,21 @@ def randomHeuristic(state):
 
 
 def heuristic(state):
-    hePlayerX = calculateHeuristic(state, "X")
-    hePlayerO = calculateHeuristic(state, "O")
-    if math.isinf(hePlayerX):
+    if state.to_move == "X":
+        computer = "X"
+        player = "O"
+    else:
+        computer = "O"
+        player = "X"
+    hePlayerC = calculateHeuristic(state, computer)
+    hePlayerP = calculateHeuristic(state, player)
+    if math.isinf(hePlayerC):
         #print "infinito para x"
         return 100000000
-    elif math.isinf(hePlayerO):
+    elif math.isinf(hePlayerP):
         #print "infinito para o"
         return -100000000
-    return hePlayerX - hePlayerO
+    return hePlayerC - hePlayerP
 
 
 def calculateHeuristic(state, player):

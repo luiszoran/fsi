@@ -1,5 +1,7 @@
 from random import randint
 
+import math
+
 
 def randomHeuristic(state):
     return randint(0, 100)
@@ -8,6 +10,12 @@ def randomHeuristic(state):
 def heuristic(state):
     hePlayerX = calculateHeuristic(state, "X")
     hePlayerO = calculateHeuristic(state, "O")
+    if math.isinf(hePlayerX):
+        #print "infinito para x"
+        return 100000000
+    elif math.isinf(hePlayerO):
+        #print "infinito para o"
+        return -100000000
     return hePlayerX - hePlayerO
 
 
@@ -50,7 +58,7 @@ def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
         x += desplazamientoX
         y += desplazamientoY
     if count == 4:
-        he += 1000000
+        he = float('inf')
     else:
         he += 10**count
     return he

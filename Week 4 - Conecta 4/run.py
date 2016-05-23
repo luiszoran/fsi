@@ -37,7 +37,7 @@ if coor == "s":
     player = "player"
 else:
     player = "computer"
-        move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
+    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
 
 
 while True:

@@ -1,14 +1,25 @@
 from random import randint
-
 import math
-
 
 def randomHeuristic(state):
     return randint(0, 100)
 
 
+def memoize(function):
+    memo = {}
+    def helper(state):
+        if str(state.board) not in memo:
+            memo[str(state.board)] = function(state)
+        return memo[str(state.board)]
+    return helper
+
+
+@memoize
 def heuristic(state):
+
     if state.to_move == "X":
+#    if run.empieza() == "n":
+
         computer = "X"
         player = "O"
     else:
@@ -23,7 +34,6 @@ def heuristic(state):
         #print "infinito para o"
         return -100000000
     return hePlayerC - hePlayerP
-
 
 def calculateHeuristic(state, player):
     board = state.board

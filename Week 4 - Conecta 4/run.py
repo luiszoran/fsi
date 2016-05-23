@@ -11,7 +11,7 @@ def computersTurn():
     print "Thinking..."
     # move = games.minimax_decision(state, game)
     # move = games.alphabeta_full_search(state, game)
-    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
+    move = games.alphabeta_search(state, game, d=profundidad, eval_fn=heuristic.heuristic)
     state = game.make_move(move, state)
     player = 'player'
 
@@ -30,10 +30,24 @@ def playersTurn():
     player = 'computer'
 
 
-col_str = raw_input("Quiere empezar usted (S/N)?: ")
-coor = str(col_str).strip().lower()
+dif_str = raw_input("Elija el nivel de dificultad, Facil(1), Medio(2), Dificil(3)): ")
+dif = int(str(dif_str).strip())
 
-if coor == "s":
+if dif < 1 or dif > 3:
+    print "Numero incorrecto, jugando dificultad media."
+    dif = 2
+
+if dif == 1:
+    profundidad = 2
+elif dif == 2:
+    profundidad = 4
+else:
+    profundidad = 6
+
+emp_str = raw_input("Quiere empezar usted (S/N)?: ")
+emp = str(emp_str).strip().lower()
+
+if emp == "s":
     player = "player"
 else:
     player = "computer"

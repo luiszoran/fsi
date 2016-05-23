@@ -1,49 +1,71 @@
 from random import randint
 
+import math
+
 
 def randomHeuristic(state):
     return randint(0, 100)
 
 
-def posibles4EnRaya(state):
-    libres = state.moves
+def heuristic(state):
+    hePlayerX = calculateHeuristic(state, "X")
+    hePlayerO = calculateHeuristic(state, "O")
+    if math.isinf(hePlayerX):
+        #print "infinito para x"
+        return 100000000
+    elif math.isinf(hePlayerO):
+        #print "infinito para o"
+        return -100000000
+    return hePlayerX - hePlayerO
+
+
+def calculateHeuristic(state, player):
     board = state.board
-    lista = []
-    for hueco in board:
-        if board.get(hueco) == "X":
-            lista.append(compute_utility(board, hueco, "X"))
-    return sum(lista)
+    moves = legal_moves(state)
+    he = 0
+    for move in moves:
+        # Comprobar Filas
+        he += comprobarLinea(board, move, player, -1, 0)
+        he += comprobarLinea(board, move, player, 1, 0)
+        # Comprobar columnas
+        he += comprobarLinea(board, move, player, 0, -1)
+        he += comprobarLinea(board, move, player, 0, 1)
+        # Comprobar diagonales
+        he += comprobarLinea(board, move, player, -1, 1)
+        he += comprobarLinea(board, move, player, 1, -1)
+        he += comprobarLinea(board, move, player, 1, 1)
+        he += comprobarLinea(board, move, player, -1, -1)
+    return he
 
 
-def compute_utility(board, move, player):
-    "If X wins with this move, return 1; if O return -1; else return 0."
-    lista = [0, 0, 0, 0]
-    lista[0] = k_in_row(board, move, player, (0, 1))  # comprobar columna
-    lista[1] = k_in_row(board, move, player, (1, 0))  # comprobar fila
-    lista[2] = k_in_row(board, move, player, (1, -1))  # comprobar diagonal izquieda
-    lista[3] = k_in_row(board, move, player, (1, 1))  # comprobar diagonal derecha
-
-    return sum(lista)
-
-
-def k_in_row(board, move, player, (delta_x, delta_y)):
-    "Return true if there is a line through move on board for player."
+def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
+    he = 0
     x, y = move
-    n = 0  # n is number of moves in row
-    while board.get((x, y), '.') == player:
-        n += 1
-        x, y = x + delta_x, y + delta_y
+    x += desplazamientoX
+    y += desplazamientoY
+    count = 0
+    inRow = True
+    while 0 < y < 7 and 0 < x < 8:
+        if board.get((x, y), '.') == player:
+            he += 50
+            if inRow:
+                count += 1
+        elif board.get((x, y), '.') == ".":
+            he += 25
+            inRow = False
+        else:
+            break
+        x += desplazamientoX
+        y += desplazamientoY
+    if count == 4:
+        he = float('inf')
+    else:
+        he += 10**count
+    return he
 
-    x, y = move
-    while board.get((x, y), '.') == player:
-        n += 1
-        x, y = x - delta_x, y - delta_y
 
-    n -= 1  # Because we counted move itself twice
-    if n == 4:
-        return 1000
-    return n
+def legal_moves(state):
+    "Legal moves are any square not yet taken."
 
-
-def avg(lista):
-    return sum(lista) / float(len(lista))
+    return [(x, y) for (x, y) in state.moves
+            if y == 1 or (x, y - 1) in state.board]

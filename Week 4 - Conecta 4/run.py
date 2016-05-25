@@ -1,5 +1,6 @@
 import games
 import heuristic
+import starter
 
 #game = games.TicTacToe(h=3,v=3,k=3)
 game = games.ConnectFour()
@@ -52,7 +53,7 @@ if emp == "s":
 else:
     player = "computer"
 #    move = games.alphabeta_search(state, game, eval_fn=heuristic.heuristic)
-
+starter.setStarter(player)
 
 while True:
     print "Jugador a mover:", game.to_move(state)

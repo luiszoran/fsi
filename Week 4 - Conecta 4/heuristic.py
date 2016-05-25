@@ -1,5 +1,6 @@
 from random import randint
 import math
+import starter
 
 def randomHeuristic(state):
     return randint(0, 100)
@@ -16,10 +17,7 @@ def memoize(function):
 
 @memoize
 def heuristic(state):
-
-    if state.to_move == "X":
-#    if run.empieza() == "n":
-
+    if starter.getStarter() == "computer":
         computer = "X"
         player = "O"
     else:

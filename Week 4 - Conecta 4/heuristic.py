@@ -69,7 +69,7 @@ def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
             break
         x += desplazamientoX
         y += desplazamientoY
-    if count == 4:
+    if count >= 4:
         he = float('inf')
     elif count > 0:
         he += 10**count

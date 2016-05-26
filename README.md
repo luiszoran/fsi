@@ -48,4 +48,4 @@ a partir de un estado específico
 
 :white_circle: :white_circle: :red_circle: :large_blue_circle: :large_blue_circle: :white_circle: :white_circle:
 
-:white_circle: :red_circle: :large_blue_circle: :red_circle: :large_blue_circle: :white_circle: :white_circle:
+:red_circle: :red_circle: :large_blue_circle: :red_circle: :large_blue_circle: :white_circle: :white_circle:

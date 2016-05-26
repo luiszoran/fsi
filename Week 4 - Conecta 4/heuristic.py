@@ -25,12 +25,10 @@ def heuristic(state):
         player = "X"
     hePlayerC = calculateHeuristic(state, computer)
     hePlayerP = calculateHeuristic(state, player)
+    if math.isinf(hePlayerP):
+        return -hePlayerP
     if math.isinf(hePlayerC):
-        #print "infinito para x"
-        return 100000000
-    elif math.isinf(hePlayerP):
-        #print "infinito para o"
-        return -100000000
+        return hePlayerC
     return hePlayerC - hePlayerP
 
 def calculateHeuristic(state, player):
@@ -55,8 +53,8 @@ def calculateHeuristic(state, player):
 def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
     he = 0
     x, y = move
-    x += desplazamientoX
-    y += desplazamientoY
+    if y > 1:
+        y -= 1
     count = 0
     inRow = True
     while 0 < y < 7 and 0 < x < 8:
@@ -65,7 +63,7 @@ def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
             if inRow:
                 count += 1
         elif board.get((x, y), '.') == ".":
-            he += 25
+            he += 30
             inRow = False
         else:
             break
@@ -73,7 +71,7 @@ def comprobarLinea(board, move, player, desplazamientoX, desplazamientoY):
         y += desplazamientoY
     if count == 4:
         he = float('inf')
-    else:
+    elif count > 0:
         he += 10**count
     return he
 

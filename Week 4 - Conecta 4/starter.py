@@ -1,4 +1,4 @@
-starter = "computer"
+starter = ""
 
 def getStarter():
     return starter
